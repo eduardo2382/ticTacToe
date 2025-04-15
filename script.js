@@ -1,6 +1,10 @@
 var vez = undefined
 mudarVez()
+
+var isWin = false
+
 var jogadas = [ , , , , , , , , ,]
+
 const combinacoes = [
     [0, 1, 2],
     [3, 4, 5],
@@ -11,15 +15,26 @@ const combinacoes = [
     [0, 4, 8],
     [2, 4, 6]
 ]
+
 const areas = document.querySelectorAll('.area')
+
+var placar = {
+    circle: 0,
+    cross: 0
+}
 
 
 areas.forEach((area, numArea)=>{
-    area.addEventListener('click', ()=>{
-        if(verificarArea(numArea)){
+    area.addEventListener('click', clickArea = ()=>{
+        console.log(isWin)
+        if(verificarArea(numArea) && !isWin){
             marcarJogada(numArea, area)
             renderizar()
-            mudarVez()
+            if(verificarVitoria()){
+                finalizarJogo()
+            } else{
+                mudarVez()
+            }
             
         }
     })
@@ -95,5 +110,21 @@ function verificarVitoria(){
             return jogadas[index] == vez
         })
     })
+}
+
+function finalizarJogo(){
+    isWin = true
+
+    areas.forEach((area, numArea)=>{
+        area.style.cursor = 'not-allowed'
+    })
+
+    if(vez == 0){
+        placar.circle++
+    } else{
+        placar.cross++
+    }
+
+    console.log(placar)
 }
 
