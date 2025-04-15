@@ -1,18 +1,30 @@
 var vez = undefined
 mudarVez()
 var jogadas = [ , , , , , , , , ,]
-
+const combinacoes = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+]
 const areas = document.querySelectorAll('.area')
+
 
 areas.forEach((area, numArea)=>{
     area.addEventListener('click', ()=>{
         if(verificarArea(numArea)){
-            marcarJogada(numArea)
+            marcarJogada(numArea, area)
             renderizar()
             mudarVez()
+            
         }
     })
 })
+
 
 function mudarVez(){
     if(vez == undefined){
@@ -42,13 +54,14 @@ function mudarPlacar(vez){
     }
 }
 
-function marcarJogada(numArea){
+function marcarJogada(numArea, area){
     for (let i = 0; i < jogadas.length; i++) {
         if(i == numArea){
             jogadas[i] = vez
         }
-        
     }
+
+    area.style.cursor = 'not-allowed'
 }
 
 function verificarArea(numArea){
@@ -76,4 +89,11 @@ function renderizar(){
     }
 }
 
+function verificarVitoria(){
+    return combinacoes.some((comb)=>{
+        return comb.every((index)=>{
+            return jogadas[index] == vez
+        })
+    })
+}
 
