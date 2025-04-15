@@ -83,3 +83,19 @@ td{
     font-size: 4em;
     font-weight: 900;
 }
+
+button{
+    background-color: black;
+
+    color: #181818;
+    font-size: 1em;
+    font-weight: 500;
+    
+    margin-top: 20px;
+    padding: 5px 10px;
+
+    border: none;
+    border-radius: 5px;
+
+    cursor: not-allowed;
+}

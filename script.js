@@ -1,3 +1,8 @@
+var placar = {
+    circle: 0,
+    cross: 0
+}
+
 var vez = undefined
 mudarVez()
 
@@ -18,20 +23,16 @@ const combinacoes = [
 
 const areas = document.querySelectorAll('.area')
 
-var placar = {
-    circle: 0,
-    cross: 0
-}
 
 
 areas.forEach((area, numArea)=>{
     area.addEventListener('click', clickArea = ()=>{
-        console.log(isWin)
         if(verificarArea(numArea) && !isWin){
             marcarJogada(numArea, area)
             renderizar()
             if(verificarVitoria()){
                 finalizarJogo()
+                mudarPlacar()
             } else{
                 mudarVez()
             }
@@ -48,7 +49,7 @@ function mudarVez(){
     } else {
         if(vez == 0){
             vez = 1
-        } else{
+        } else if(vez == 1){
             vez = 0
         }
 
@@ -60,13 +61,19 @@ function mudarPlacar(vez){
     let circle = document.querySelector('#placar .ri-circle-line')
     let close = document.querySelector('#placar .ri-close-large-line')
 
+    console.log(vez)
+
     if(vez == 0){
         circle.style.color = 'white'
         close.style.color = '#0c0c0c'
-    } else{
+    } else if(vez == 1){
         circle.style.color = '#0c0c0c'
         close.style.color = 'white'
     }
+
+    let numPlacar = document.querySelector('#placar p')
+    numPlacar.innerHTML = `${placar.circle} - ${placar.cross}`
+    
 }
 
 function marcarJogada(numArea, area){
@@ -124,7 +131,5 @@ function finalizarJogo(){
     } else{
         placar.cross++
     }
-
-    console.log(placar)
 }
 
