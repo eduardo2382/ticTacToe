@@ -131,5 +131,45 @@ function finalizarJogo(){
     } else{
         placar.cross++
     }
+
+    ativarBotões()
+}
+
+function ativarBotões(){
+    let btnNovaRodada = document.querySelector('#btnNovaRodada')
+    let btnLimparJogo = document.querySelector('#btnLimparJogo')
+
+    btnNovaRodada.style.cursor = 'pointer'
+    btnNovaRodada.style.color = 'white'
+
+    btnLimparJogo.style.cursor = 'pointer'
+    btnLimparJogo.style.color = 'white'
+
+    btnNovaRodada.addEventListener('click', novaRodada)
+}
+
+function desativarBotões(){
+    let btnNovaRodada = document.querySelector('#btnNovaRodada')
+    let btnLimparJogo = document.querySelector('#btnLimparJogo')
+
+    btnNovaRodada.style.cursor = 'not-allowed'
+    btnNovaRodada.style.color = '#181818'
+
+    btnLimparJogo.style.cursor = 'not-allowed'
+    btnLimparJogo.style.color = '#181818'
+
+    btnNovaRodada.removeEventListener('click', novaRodada)
+}
+
+function novaRodada(){
+    jogadas = [ , , , , , , , , ,]
+    isWin = false
+    mudarVez()
+    desativarBotões()
+
+    areas.forEach((area)=>{
+        area.innerHTML = ''
+        area.style.cursor = 'pointer'
+    })
 }
 
