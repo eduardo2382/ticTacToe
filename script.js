@@ -146,6 +146,7 @@ function ativarBotões(){
     btnLimparJogo.style.color = 'white'
 
     btnNovaRodada.addEventListener('click', novaRodada)
+    btnLimparJogo.addEventListener('click', limparJogo)
 }
 
 function desativarBotões(){
@@ -164,6 +165,22 @@ function desativarBotões(){
 function novaRodada(){
     jogadas = [ , , , , , , , , ,]
     isWin = false
+    vez = undefined
+    mudarVez()
+    desativarBotões()
+
+    areas.forEach((area)=>{
+        area.innerHTML = ''
+        area.style.cursor = 'pointer'
+    })
+}
+
+function limparJogo(){
+    jogadas = [ , , , , , , , , ,]
+    isWin = false
+    placar.circle = 0
+    placar.cross = 0
+    vez = undefined
     mudarVez()
     desativarBotões()
 
