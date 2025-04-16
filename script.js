@@ -160,6 +160,7 @@ function desativarBotões(){
     btnLimparJogo.style.color = '#181818'
 
     btnNovaRodada.removeEventListener('click', novaRodada)
+    btnLimparJogo.removeEventListener('click', limparJogo)
 }
 
 function novaRodada(){
