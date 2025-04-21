@@ -31,12 +31,14 @@ areas.forEach((area, numArea)=>{
             marcarJogada(numArea, area)
             renderizar()
             if(verificarVitoria()){
-                finalizarJogo()
+                finalizarJogo('vitoria')
+                mudarPlacar()
+            } else if(verificarEmpate()){
+                finalizarJogo('empate')
                 mudarPlacar()
             } else{
                 mudarVez()
             }
-            
         }
     })
 })
@@ -57,11 +59,9 @@ function mudarVez(){
     }
 }
 
-function mudarPlacar(vez){
+function mudarPlacar(){
     let circle = document.querySelector('#placar .ri-circle-line')
     let close = document.querySelector('#placar .ri-close-large-line')
-
-    console.log(vez)
 
     if(vez == 0){
         circle.style.color = 'white'
@@ -119,20 +119,40 @@ function verificarVitoria(){
     })
 }
 
-function finalizarJogo(){
-    isWin = true
-
-    areas.forEach((area, numArea)=>{
-        area.style.cursor = 'not-allowed'
+function verificarEmpate(){
+    let slots = 0
+    jogadas.forEach((jogada)=>{
+        if(typeof jogada == 'number'){
+            slots++
+        }
     })
 
-    if(vez == 0){
-        placar.circle++
-    } else{
-        placar.cross++
-    }
+    return slots == 9
+}
 
-    ativarBotões()
+function finalizarJogo(string){
+    switch (string) {
+        case 'vitoria':
+            isWin = true
+
+            areas.forEach((area, numArea)=>{
+                area.style.cursor = 'not-allowed'
+            })
+
+            if(vez == 0){
+                placar.circle++
+            } else{
+                placar.cross++
+            }
+
+            ativarBotões()
+            break;
+        case 'empate':
+            ativarBotões()
+            break;
+        default:
+            break;
+    }
 }
 
 function ativarBotões(){
